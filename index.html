@@ -1,0 +1,1380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI in Construction - Comprehensive Use Cases</title>
+    <style>
+        :root {
+            --primary-color: #f59e0b;
+            --secondary-color: #ef4444;
+            --accent-color: #10b981;
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --border-color: #334155;
+            --construction-orange: #f59e0b;
+            --safety-red: #ef4444;
+            --structure-blue: #3b82f6;
+            --material-green: #10b981;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--bg-color), #0b1220);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--construction-orange), var(--safety-red), var(--structure-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 4s ease-in-out infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .nav-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            border-color: var(--primary-color);
+        }
+
+        .nav-btn.active {
+            background: linear-gradient(45deg, var(--construction-orange), var(--structure-blue));
+            border: none;
+        }
+
+        .content-section {
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            border-color: rgba(255,255,255,0.1);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--construction-orange), var(--structure-blue), var(--safety-red));
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .icon.ml { background: rgba(245, 158, 11, 0.2); color: var(--construction-orange); }
+        .icon.gen { background: rgba(239, 68, 68, 0.2); color: var(--safety-red); }
+        .icon.ag { background: rgba(59, 130, 246, 0.2); color: var(--structure-blue); }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-subtitle {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-content {
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            background: linear-gradient(45deg, var(--construction-orange), var(--structure-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tech-tag {
+            background: rgba(255,255,255,0.1);
+            color: var(--text-secondary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .architecture-diagram {
+            background: rgba(0,0,0,0.3);
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border: 1px solid var(--border-color);
+        }
+
+        .architecture-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+            padding: 0.5rem;
+            border-radius: 6px;
+            background: rgba(255,255,255,0.05);
+        }
+
+        .architecture-item::before {
+            content: '→';
+            color: var(--construction-orange);
+            font-weight: bold;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(59, 130, 246, 0.1));
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .highlight-title {
+            color: var(--construction-orange);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .metric-card {
+            background: rgba(255,255,255,0.05);
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .metric-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--construction-orange);
+        }
+
+        .metric-label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 2rem;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        .construction-icon {
+            font-size: 2rem;
+            margin-right: 1rem;
+        }
+
+        .safety-badge {
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            margin-left: 0.5rem;
+        }
+
+        .structure-badge {
+            background: rgba(59, 130, 246, 0.2);
+            color: #3b82f6;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            margin-left: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            .container { padding: 1rem; }
+            .card-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏗 AI in Construction</h1>
+            <p class="subtitle">Comprehensive Guide to Machine Learning, Generative AI, and Agentic Systems in Building, Infrastructure, and Project Management</p>
+        </header>
+
+        <div class="nav-container">
+            <button class="nav-btn active" onclick="showSection('ml')">🔮 ML / Predictive</button>
+            <button class="nav-btn" onclick="showSection('gen')">✍️ Generative AI</button>
+            <button class="nav-btn" onclick="showSection('agentic')">🤖 Agentic AI</button>
+        </div>
+
+        <!-- ML / Predictive Use Cases -->
+        <div id="ml" class="content-section active">
+            <h2 class="section-title">🔮 Machine Learning & Predictive Analytics</h2>
+            <p style="text-align: center; color: var(--text-secondary); margin-bottom: 3rem;">
+                Advanced statistical models and algorithms for construction project optimization, safety management, and structural integrity
+            </p>
+
+            <div class="card-grid">
+                <!-- Project Delay Prediction -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ml">⏱️</div>
+                        <div>
+                            <div class="card-title">Project Delay Prediction</div>
+                            <div class="card-subtitle">Schedule Management</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Predict potential project delays by analyzing historical data, weather patterns, resource availability, and supply chain factors.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Schedule Analysis</span>
+                            <span class="tech-tag">Delay Prediction</span>
+                            <span class="tech-tag">Resource Planning</span>
+                            <span class="tech-tag">Risk Assessment</span>
+                            <span class="tech-tag">Project Management</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Historical Data → Weather Analysis → Resource Tracking → Risk Assessment → Delay Prediction → Mitigation</div>
+                            <div class="architecture-item">Project Timeline → Milestone Tracking → Delay Factors → Prediction → Planning → Adjustment</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Historical project timelines</li>
+                                <li>Weather pattern data</li>
+                                <li>Resource availability</li>
+                                <li>Supply chain information</li>
+                                <li>Contractor performance</li>
+                                <li>Regulatory approval times</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">80-90%</div>
+                                <div class="metric-label">Delay Prediction</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">40-60%</div>
+                                <div class="metric-label">Schedule Accuracy</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">30-50%</div>
+                                <div class="metric-label">Cost Overrun Reduction</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cost Overrun Modeling -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ml">💰</div>
+                        <div>
+                            <div class="card-title">Cost Overrun Modeling</div>
+                            <div class="card-subtitle">Budget Management</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Predict and prevent cost overruns by analyzing project scope changes, material price fluctuations, and labor productivity.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Cost Analysis</span>
+                            <span class="tech-tag">Budget Forecasting</span>
+                            <span class="tech-tag">Risk Modeling</span>
+                            <span class="tech-tag">Scope Management</span>
+                            <span class="tech-tag">Financial Planning</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Budget Data → Cost Tracking → Risk Analysis → Overrun Prediction → Mitigation → Control</div>
+                            <div class="architecture-item">Project Scope → Material Costs → Labor Rates → Overrun Modeling → Budgeting → Monitoring</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Historical cost data</li>
+                                <li>Material price trends</li>
+                                <li>Labor productivity rates</li>
+                                <li>Scope change patterns</li>
+                                <li>Market conditions</li>
+                                <li>Project complexity factors</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">75-85%</div>
+                                <div class="metric-label">Cost Prediction</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">30-50%</div>
+                                <div class="metric-label">Overrun Reduction</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">40-60%</div>
+                                <div class="metric-label">Budget Accuracy</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Safety Incident Prediction -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ml">⚠️</div>
+                        <div>
+                            <div class="card-title">Safety Incident Prediction</div>
+                            <div class="card-subtitle">Risk Prevention</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Predict potential safety incidents by analyzing worker behavior, equipment conditions, and environmental factors to prevent accidents.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Safety Analytics</span>
+                            <span class="tech-tag">Risk Assessment</span>
+                            <span class="tech-tag">Incident Prevention</span>
+                            <span class="tech-tag">Worker Monitoring</span>
+                            <span class="tech-tag">Environmental Analysis</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Worker Data → Equipment Monitoring → Environmental Analysis → Risk Assessment → Prevention → Safety</div>
+                            <div class="architecture-item">Safety Records → Behavior Analysis → Hazard Detection → Prediction → Mitigation → Training</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Historical safety incidents</li>
+                                <li>Worker behavior patterns</li>
+                                <li>Equipment condition data</li>
+                                <li>Environmental conditions</li>
+                                <li>Safety protocol compliance</li>
+                                <li>Training records</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">80-90%</div>
+                                <div class="metric-label">Incident Prediction</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">50-70%</div>
+                                <div class="metric-label">Safety Improvement</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">60-80%</div>
+                                <div class="metric-label">Accident Reduction</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Equipment Maintenance Forecasting -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ml">🔧</div>
+                        <div>
+                            <div class="card-title">Equipment Maintenance</div>
+                            <div class="card-subtitle">Predictive Maintenance</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Predict equipment maintenance needs to prevent breakdowns and optimize maintenance schedules for construction machinery.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Predictive Maintenance</span>
+                            <span class="tech-tag">Equipment Monitoring</span>
+                            <span class="tech-tag">Failure Prediction</span>
+                            <span class="tech-tag">Maintenance Scheduling</span>
+                            <span class="tech-tag">Asset Management</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Equipment Data → Usage Monitoring → Condition Analysis → Maintenance Prediction → Scheduling → Optimization</div>
+                            <div class="architecture-item">Sensor Data → Performance Tracking → Failure Analysis → Maintenance Planning → Execution → Monitoring</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Equipment usage data</li>
+                                <li>Sensor readings</li>
+                                <li>Maintenance history</li>
+                                <li>Operating conditions</li>
+                                <li>Failure patterns</li>
+                                <li>Manufacturer specifications</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">85-95%</div>
+                                <div class="metric-label">Failure Prediction</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">40-60%</div>
+                                <div class="metric-label">Downtime Reduction</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">30-50%</div>
+                                <div class="metric-label">Maintenance Costs</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Labor Demand Forecasting -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ml">👷</div>
+                        <div>
+                            <div class="card-title">Labor Demand Forecasting</div>
+                            <div class="card-subtitle">Workforce Planning</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Predict labor requirements throughout project phases to optimize workforce allocation and prevent labor shortages or surpluses.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Workforce Planning</span>
+                            <span class="tech-tag">Labor Forecasting</span>
+                            <span class="tech-tag">Skill Requirements</span>
+                            <span class="tech-tag">Resource Allocation</span>
+                            <span class="tech-tag">Project Scheduling</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Project Schedule → Task Analysis → Skill Requirements → Labor Forecasting → Recruitment → Allocation</div>
+                            <div class="architecture-item">Workforce Data → Demand Analysis → Forecasting → Planning → Hiring → Deployment</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Project task breakdown</li>
+                                <li>Skill requirement analysis</li>
+                                <li>Historical labor data</li>
+                                <li>Worker availability</li>
+                                <li>Training requirements</li>
+                                <li>Market labor conditions</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">80-90%</div>
+                                <div class="metric-label">Labor Forecasting</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">50-70%</div>
+                                <div class="metric-label">Workforce Efficiency</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">40-60%</div>
+                                <div class="metric-label">Labor Cost Optimization</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Material Price Prediction -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ml">📦</div>
+                        <div>
+                            <div class="card-title">Material Price Prediction</div>
+                            <div class="card-subtitle">Cost Management</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Predict material price fluctuations to optimize purchasing timing and budget planning for construction projects.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Price Forecasting</span>
+                            <span class="tech-tag">Market Analysis</span>
+                            <span class="tech-tag">Supply Chain</span>
+                            <span class="tech-tag">Cost Optimization</span>
+                            <span class="tech-tag">Procurement Planning</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Market Data → Price Trends → Supply Analysis → Demand Forecasting → Price Prediction → Procurement</div>
+                            <div class="architecture-item">Material Requirements → Market Research → Price Analysis → Timing → Purchasing → Cost Control</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Historical material prices</li>
+                                <li>Market supply data</li>
+                                <li>Demand patterns</li>
+                                <li>Global market trends</li>
+                                <li>Transportation costs</li>
+                                <li>Seasonal variations</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">75-85%</div>
+                                <div class="metric-label">Price Prediction</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">30-50%</div>
+                                <div class="metric-label">Cost Savings</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">40-60%</div>
+                                <div class="metric-label">Budget Accuracy</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Generative AI Use Cases -->
+        <div id="gen" class="content-section">
+            <h2 class="section-title">✍️ Generative AI Applications</h2>
+            <p style="text-align: center; color: var(--text-secondary); margin-bottom: 3rem;">
+                AI-powered content creation, documentation, and communication for construction projects, safety compliance, and stakeholder management
+            </p>
+
+            <div class="card-grid">
+                <!-- Proposal Drafting -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon gen">📝</div>
+                        <div>
+                            <div class="card-title">Proposal Drafting</div>
+                            <div class="card-subtitle">Bid Management</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Generate comprehensive construction proposals and bids with technical specifications, cost estimates, and project timelines.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">GPT-4/Claude</span>
+                            <span class="tech-tag">Proposal Writing</span>
+                            <span class="tech-tag">Bid Management</span>
+                            <span class="tech-tag">Technical Specifications</span>
+                            <span class="tech-tag">Cost Estimation</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Project Requirements → Technical Analysis → Cost Estimation → Proposal Drafting → Review → Submission</div>
+                            <div class="architecture-item">Client Needs → Scope Definition → Budget Planning → Proposal Creation → Optimization → Bidding</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Project specifications</li>
+                                <li>Cost estimation data</li>
+                                <li>Technical requirements</li>
+                                <li>Client preferences</li>
+                                <li>Competitor analysis</li>
+                                <li>Company capabilities</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">90-95%</div>
+                                <div class="metric-label">Proposal Quality</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">70-85%</div>
+                                <div class="metric-label">Win Rate</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">4-6 hours</div>
+                                <div class="metric-label">Proposal Generation</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Compliance Documentation -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon gen">📋</div>
+                        <div>
+                            <div class="card-title">Compliance Documentation</div>
+                            <div class="card-subtitle">Regulatory Requirements</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Generate comprehensive compliance documentation including safety plans, environmental assessments, and regulatory filings.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">GPT-4/Claude</span>
+                            <span class="tech-tag">Compliance Documentation</span>
+                            <span class="tech-tag">Regulatory Requirements</span>
+                            <span class="tech-tag">Safety Plans</span>
+                            <span class="tech-tag">Environmental Compliance</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Regulatory Requirements → Compliance Analysis → Documentation → Review → Approval → Submission</div>
+                            <div class="architecture-item">Project Scope → Legal Requirements → Documentation → Compliance Check → Filing → Monitoring</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Regulatory requirements</li>
+                                <li>Safety standards</li>
+                                <li>Environmental regulations</li>
+                                <li>Building codes</li>
+                                <li>Permit requirements</li>
+                                <li>Industry standards</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">90-95%</div>
+                                <div class="metric-label">Compliance Accuracy</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">80-90%</div>
+                                <div class="metric-label">Approval Rate</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">6-8 hours</div>
+                                <div class="metric-label">Documentation Generation</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Inspection Reports -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon gen">🔍</div>
+                        <div>
+                            <div class="card-title">Inspection Reports</div>
+                            <div class="card-subtitle">Quality Assurance</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Generate detailed inspection reports documenting construction progress, quality issues, and compliance with specifications.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">GPT-4/Claude</span>
+                            <span class="tech-tag">Inspection Reports</span>
+                            <span class="tech-tag">Quality Assurance</span>
+                            <span class="tech-tag">Progress Documentation</span>
+                            <span class="tech-tag">Compliance Tracking</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Inspection Data → Analysis → Report Generation → Issue Tracking → Recommendations → Follow-up</div>
+                            <div class="architecture-item">Site Inspection → Data Collection → Analysis → Reporting → Action Items → Resolution</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Inspection checklists</li>
+                                <li>Quality standards</li>
+                                <li>Progress tracking data</li>
+                                <li>Issue documentation</li>
+                                <li>Compliance requirements</li>
+                                <li>Historical inspection data</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">90-95%</div>
+                                <div class="metric-label">Report Quality</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">80-90%</div>
+                                <div class="metric-label">Issue Detection</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">5-10 minutes</div>
+                                <div class="metric-label">Report Generation</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Safety Manuals -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon gen">⚠️</div>
+                        <div>
+                            <div class="card-title">Safety Manuals</div>
+                            <div class="card-subtitle">Training Documentation</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Create comprehensive safety manuals and training materials for construction site safety procedures and emergency protocols.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">GPT-4/Claude</span>
+                            <span class="tech-tag">Safety Documentation</span>
+                            <span class="tech-tag">Training Materials</span>
+                            <span class="tech-tag">Emergency Procedures</span>
+                            <span class="tech-tag">Safety Protocols</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Safety Requirements → Manual Creation → Training Content → Review → Distribution → Training</div>
+                            <div class="architecture-item">Hazard Analysis → Safety Procedures → Manual Writing → Review → Implementation → Training</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Safety regulations</li>
+                                <li>Hazard analysis</li>
+                                <li>Emergency procedures</li>
+                                <li>Training requirements</li>
+                                <li>Site-specific risks</li>
+                                <li>Best practices</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">90-95%</div>
+                                <div class="metric-label">Manual Quality</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">80-90%</div>
+                                <div class="metric-label">Training Effectiveness</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">6-8 hours</div>
+                                <div class="metric-label">Manual Generation</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contract Drafting -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon gen">📄</div>
+                        <div>
+                            <div class="card-title">Contract Drafting</div>
+                            <div class="card-subtitle">Legal Documentation</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Generate construction contracts with terms, specifications, and legal requirements tailored to project needs and regulatory compliance.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">GPT-4/Claude</span>
+                            <span class="tech-tag">Contract Generation</span>
+                            <span class="tech-tag">Legal Terms</span>
+                            <span class="tech-tag">Construction Specifications</span>
+                            <span class="tech-tag">Compliance Requirements</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Project Requirements → Legal Review → Contract Drafting → Specification Integration → Review → Execution</div>
+                            <div class="architecture-item">Contract Terms → Legal Compliance → Specification Details → Risk Management → Approval → Signing</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Contract templates</li>
+                                <li>Legal requirements</li>
+                                <li>Project specifications</li>
+                                <li>Industry standards</li>
+                                <li>Risk mitigation clauses</li>
+                                <li>Regulatory compliance</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">90-95%</div>
+                                <div class="metric-label">Contract Quality</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">80-90%</div>
+                                <div class="metric-label">Legal Compliance</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">4-6 hours</div>
+                                <div class="metric-label">Contract Generation</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stakeholder Update Reports -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon gen">📊</div>
+                        <div>
+                            <div class="card-title">Stakeholder Updates</div>
+                            <div class="card-subtitle">Progress Communication</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Generate regular progress reports and updates for project stakeholders including investors, clients, and regulatory bodies.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">GPT-4/Claude</span>
+                            <span class="tech-tag">Progress Reporting</span>
+                            <span class="tech-tag">Stakeholder Communication</span>
+                            <span class="tech-tag">Project Updates</span>
+                            <span class="tech-tag">Performance Metrics</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Progress Data → Analysis → Report Generation → Stakeholder Review → Communication → Follow-up</div>
+                            <div class="architecture-item">Project Metrics → Data Analysis → Report Creation → Distribution → Feedback → Action</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Project progress data</li>
+                                <li>Performance metrics</li>
+                                <li>Stakeholder requirements</li>
+                                <li>Communication preferences</li>
+                                <li>Reporting standards</li>
+                                <li>Issue tracking</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">90-95%</div>
+                                <div class="metric-label">Report Quality</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">80-90%</div>
+                                <div class="metric-label">Stakeholder Satisfaction</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">3-5 minutes</div>
+                                <div class="metric-label">Report Generation</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Agentic AI Use Cases -->
+        <div id="agentic" class="content-section">
+            <h2 class="section-title">🤖 Agentic AI Systems</h2>
+            <p style="text-align: center; color: var(--text-secondary); margin-bottom: 3rem;">
+                Autonomous AI agents that can reason, plan, and execute complex construction operations and project management workflows
+            </p>
+
+            <div class="card-grid">
+                <!-- Project Management Orchestration Agent -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ag">🏗️</div>
+                        <div>
+                            <div class="card-title">Project Management</div>
+                            <div class="card-subtitle">Construction Orchestration</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Automate and coordinate all aspects of construction project management including scheduling, resource allocation, and progress tracking.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Project Management</span>
+                            <span class="tech-tag">Construction Coordination</span>
+                            <span class="tech-tag">Resource Allocation</span>
+                            <span class="tech-tag">Schedule Optimization</span>
+                            <span class="tech-tag">Progress Tracking</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Project Planning → Resource Allocation → Scheduling → Execution → Monitoring → Adjustment</div>
+                            <div class="architecture-item">Task Management → Team Coordination → Progress Tracking → Quality Control → Reporting → Completion</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Project schedules</li>
+                                <li>Resource availability</li>
+                                <li>Task dependencies</li>
+                                <li>Progress tracking systems</li>
+                                <li>Quality standards</li>
+                                <li>Communication protocols</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">80-90%</div>
+                                <div class="metric-label">Project Efficiency</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">40-60%</div>
+                                <div class="metric-label">Schedule Adherence</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">70-90%</div>
+                                <div class="metric-label">Resource Optimization</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Safety Compliance Agent -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ag">⚠️</div>
+                        <div>
+                            <div class="card-title">Safety Compliance</div>
+                            <div class="card-subtitle">Site Safety Management</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Monitor and enforce safety compliance across construction sites using real-time data analysis and automated safety protocol management.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Safety Monitoring</span>
+                            <span class="tech-tag">Compliance Management</span>
+                            <span class="tech-tag">Real-time Analysis</span>
+                            <span class="tech-tag">Protocol Enforcement</span>
+                            <span class="tech-tag">Incident Prevention</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Site Monitoring → Compliance Analysis → Protocol Enforcement → Training → Incident Prevention → Reporting</div>
+                            <div class="architecture-item">Safety Data → Risk Assessment → Compliance Check → Alerts → Training → Improvement</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Site sensor data</li>
+                                <li>Safety protocol requirements</li>
+                                <li>Worker compliance data</li>
+                                <li>Incident reports</li>
+                                <li>Training records</li>
+                                <li>Regulatory requirements</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">85-95%</div>
+                                <div class="metric-label">Compliance Accuracy</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">60-80%</div>
+                                <div class="metric-label">Safety Improvement</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">24/7</div>
+                                <div class="metric-label">Real-time Monitoring</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Equipment Maintenance Agent -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ag">🔧</div>
+                        <div>
+                            <div class="card-title">Equipment Maintenance</div>
+                            <div class="card-subtitle">Asset Management</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Automate equipment maintenance scheduling, monitoring, and optimization to maximize equipment uptime and performance.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Equipment Monitoring</span>
+                            <span class="tech-tag">Maintenance Scheduling</span>
+                            <span class="tech-tag">Predictive Maintenance</span>
+                            <span class="tech-tag">Asset Optimization</span>
+                            <span class="tech-tag">Performance Tracking</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Equipment Monitoring → Maintenance Scheduling → Service Coordination → Performance Tracking → Optimization → Reporting</div>
+                            <div class="architecture-item">Asset Data → Condition Monitoring → Maintenance Planning → Service Execution → Performance Analysis → Improvement</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Equipment sensor data</li>
+                                <li>Maintenance schedules</li>
+                                <li>Service records</li>
+                                <li>Performance metrics</li>
+                                <li>Usage patterns</li>
+                                <li>Vendor information</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">85-95%</div>
+                                <div class="metric-label">Equipment Uptime</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">40-60%</div>
+                                <div class="metric-label">Maintenance Costs</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">70-90%</div>
+                                <div class="metric-label">Equipment Performance</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Workforce Scheduling Agent -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ag">👷</div>
+                        <div>
+                            <div class="card-title">Workforce Scheduling</div>
+                            <div class="card-subtitle">Labor Management</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Optimize workforce scheduling based on project needs, worker skills, availability, and productivity patterns.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Workforce Scheduling</span>
+                            <span class="tech-tag">Labor Optimization</span>
+                            <span class="tech-tag">Skill Matching</span>
+                            <span class="tech-tag">Availability Management</span>
+                            <span class="tech-tag">Productivity Tracking</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Workforce Data → Skill Analysis → Availability Tracking → Scheduling → Assignment → Performance Monitoring</div>
+                            <div class="architecture-item">Labor Requirements → Worker Profiles → Schedule Optimization → Assignment → Tracking → Adjustment</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Worker skill profiles</li>
+                                <li>Availability schedules</li>
+                                <li>Project requirements</li>
+                                <li>Productivity data</li>
+                                <li>Training records</li>
+                                <li>Labor regulations</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">80-90%</div>
+                                <div class="metric-label">Scheduling Efficiency</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">50-70%</div>
+                                <div class="metric-label">Labor Productivity</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">60-80%</div>
+                                <div class="metric-label">Workforce Optimization</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Procurement Coordination Agent -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ag">📦</div>
+                        <div>
+                            <div class="card-title">Procurement Coordination</div>
+                            <div class="card-subtitle">Supply Chain Management</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Automate material procurement, supplier coordination, and delivery scheduling to ensure timely availability of construction materials.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Procurement Automation</span>
+                            <span class="tech-tag">Supplier Management</span>
+                            <span class="tech-tag">Material Tracking</span>
+                            <span class="tech-tag">Delivery Coordination</span>
+                            <span class="tech-tag">Inventory Management</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Material Requirements → Supplier Selection → Order Processing → Delivery Tracking → Inventory Management → Site Coordination</div>
+                            <div class="architecture-item">Procurement Planning → Supplier Coordination → Order Management → Delivery → Storage → Distribution</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Material requirements</li>
+                                <li>Supplier databases</li>
+                                <li>Delivery schedules</li>
+                                <li>Inventory levels</li>
+                                <li>Quality standards</li>
+                                <li>Cost data</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">85-95%</div>
+                                <div class="metric-label">Material Availability</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">40-60%</div>
+                                <div class="metric-label">Procurement Costs</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">70-90%</div>
+                                <div class="metric-label">Delivery Accuracy</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cost Control Agent -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ag">💰</div>
+                        <div>
+                            <div class="card-title">Cost Control</div>
+                            <div class="card-subtitle">Budget Management</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Monitor and control project costs in real-time, identifying variances and implementing corrective actions to maintain budget compliance.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Cost Monitoring</span>
+                            <span class="tech-tag">Budget Control</span>
+                            <span class="tech-tag">Variance Analysis</span>
+                            <span class="tech-tag">Cost Optimization</span>
+                            <span class="tech-tag">Financial Reporting</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Cost Tracking → Variance Analysis → Budget Monitoring → Cost Control → Reporting → Optimization</div>
+                            <div class="architecture-item">Expense Data → Analysis → Control Measures → Budgeting → Monitoring → Adjustment</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Cost tracking data</li>
+                                <li>Budget allocations</li>
+                                <li>Expense reports</li>
+                                <li>Contract terms</li>
+                                <li>Change orders</li>
+                                <li>Financial reports</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">85-95%</div>
+                                <div class="metric-label">Cost Accuracy</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">30-50%</div>
+                                <div class="metric-label">Budget Variance</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">24/7</div>
+                                <div class="metric-label">Real-time Monitoring</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>✨ Built with cutting-edge AI technologies for the future of construction and infrastructure development</p>
+            <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--text-secondary);">
+                Note: Implementation requires careful consideration of safety standards, regulatory compliance, and construction best practices
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Update navigation buttons
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Find and activate the clicked button
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>
